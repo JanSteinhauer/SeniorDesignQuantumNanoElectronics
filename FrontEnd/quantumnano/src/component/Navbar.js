@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SvgIcon from './SvgIcon';
+import { Link } from 'react-router-dom';
 
 const Navbar = styled.nav`
   background-color: #262556;
@@ -10,7 +11,7 @@ const Navbar = styled.nav`
   justify-content: center; // Center items horizontally
 `;
 
-const NavItem = styled.a`
+const NavItem = styled(Link)`
   display: flex; // Set NavItem to be a flex container as well
   align-items: center; // Center content (including SVG) vertically
   color: #f2f2f2;
@@ -41,14 +42,14 @@ const NavItem = styled.a`
 const NavBar = () => {
   return (
     <Navbar>
-      <NavItem href="#home" primary>
+      <NavItem to="/" primary>
         <SvgIcon/>
       </NavItem>
-      <NavItem href="#home" style={{color: '#24C3A7'}}>Home</NavItem> {/* Set color conditionally */}
-      <NavItem href="#support">Support</NavItem>
-      <NavItem href="#visualization">Visualization</NavItem>
-      <NavItem href="#people">People</NavItem>
-      <NavItem href="#blog">Blog</NavItem>
+      <NavItem to="/">Home</NavItem>
+      <NavItem to="/support">Support</NavItem>
+      <NavItem to="/visualization">Visualization</NavItem>
+      <NavItem to="/people">People</NavItem>
+      <NavItem to="/blog">Blog</NavItem>
     </Navbar>
   );
 };
