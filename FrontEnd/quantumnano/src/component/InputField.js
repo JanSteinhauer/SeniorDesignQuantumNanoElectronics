@@ -6,7 +6,6 @@ const Container = styled.div`
   margin: 0 auto;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
 `;
 
 const Label = styled.label`
@@ -41,7 +40,7 @@ const Input = styled.input`
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
-  border-radius: 8px; // Added rounded corners to the input field.
+  border-radius: 8px;
 `;
 
 const HelpText = styled.p`
@@ -50,18 +49,18 @@ const HelpText = styled.p`
   display: ${props => props.show ? 'block' : 'none'};
 `;
 
-const InputField = () => {
+const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk}) => {
   const [showHelp, setShowHelp] = useState(false);
 
   return (
     <Container>
       <Label>
-        Label <Asterisk>*</Asterisk>
+        {labelText} {showAsterisk && <Asterisk> *</Asterisk>}
         <InfoIcon onClick={() => setShowHelp(!showHelp)}>i</InfoIcon>
       </Label>
-      <Input type="text" placeholder="Input Text" />
+      <Input type="text" placeholder={inputPlaceholder} />
       <HelpText show={showHelp}>
-        Help Text
+        {helpText}
       </HelpText>
     </Container>
   );
