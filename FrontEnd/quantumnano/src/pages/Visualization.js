@@ -5,6 +5,7 @@ import FileDropIn from '../component/FildDropIn';
 import InputField from '../component/InputField';
 import InputFields from '../component/InputFields';
 import CodeEditor from '../component/CodeEditor';
+import Button from '../component/StyledButton';
 
 const Visualization = () => {
     return (
@@ -20,6 +21,7 @@ const Visualization = () => {
         <br></br>
         <h2>Code Editor</h2>
         <CodeEditor/>
+        <Button heading={"Start Visualization"}/>
       </div>
     );
   };
