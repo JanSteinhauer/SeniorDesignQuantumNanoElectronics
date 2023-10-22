@@ -4,6 +4,7 @@ import SearchBar from '../component/SearchBar';
 import FileDropIn from '../component/FildDropIn';
 import InputField from '../component/InputField';
 import InputFields from '../component/InputFields';
+import CodeEditor from '../component/CodeEditor';
 
 const Visualization = () => {
     return (
@@ -16,6 +17,9 @@ const Visualization = () => {
         <InputFields/>
         <h2>Input Parameters for Geometry</h2>
         <InputFields/>
+        <br></br>
+        <h2>Code Editor</h2>
+        <CodeEditor/>
       </div>
     );
   };
