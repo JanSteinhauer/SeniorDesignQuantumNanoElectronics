@@ -8,17 +8,38 @@ julia> A = zeros(5, 5);
 
 julia> B = [1 2; 3 4];
 
-julia> Ainds = CartesianIndices((2:3, 2:3));
+# Function for material parameters
+function material_parameters(
+        mat_param1::Float64, 
+        mat_param2::Float64, 
+        mat_param3::Float64, 
+        mat_param4::Float64, 
+        mat_param5::Float64, 
+        mat_param6::Float64)
+    return (mat_param1, mat_param2, mat_param3, mat_param4, mat_param5, mat_param6)
+end
 
-julia> Binds = CartesianIndices(B);
+# Function for geometry parameters
+function geometry_parameters(
+        geom_param1::Float64, 
+        geom_param2::Float64, 
+        geom_param3::Float64, 
+        geom_param4::Float64, 
+        geom_param5::Float64, 
+        geom_param6::Float64)
+    return (geom_param1, geom_param2, geom_param3, geom_param4, geom_param5, geom_param6)
+end
 
-julia> copyto!(A, Ainds, B, Binds)
-5×5 Matrix{Float64}:
- 0.0  0.0  0.0  0.0  0.0
- 0.0  1.0  2.0  0.0  0.0
- 0.0  3.0  4.0  0.0  0.0
- 0.0  0.0  0.0  0.0  0.0
- 0.0  0.0  0.0  0.0  0.0
+# Function for run parameters
+function run_parameters(
+        run_param1::Float64, 
+        run_param2::Float64, 
+        run_param3::Float64, 
+        run_param4::Float64, 
+        run_param5::Float64, 
+        run_param6::Float64)
+    return (run_param1, run_param2, run_param3, run_param4, run_param5, run_param6)
+end
 `;
 const [code, setCode] = useState(initialCode);
 const [lines, setLines] = useState(computeLines(initialCode));
