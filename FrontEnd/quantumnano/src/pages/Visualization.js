@@ -17,6 +17,38 @@ const ToggleSwitchContainer = styled.div`
 
 const Visualization = () => {
   const [showCodeEditor, setShowCodeEditor] = useState(false);
+  const [typeVar1, setTypeVar1] = useState("10");
+  const [typeVar2, setTypeVar2] = useState("12");
+  const [typeVar3, setTypeVar3] = useState("13");
+  const [typeVar4, setTypeVar4] = useState("14");
+  const [typeVar5, setTypeVar5] = useState("15");
+  const [typeVar6, setTypeVar6] = useState("16");
+
+  const handleValuesChange = (index, value) => {
+    switch(index) {
+      case "1": 
+        setTypeVar1(value);
+        break;
+      case "2":
+        setTypeVar2(value);
+        break;
+      case "3":
+        setTypeVar3(value);
+        break;
+      case "4":
+        setTypeVar4(value);
+        break;
+      case "5":
+        setTypeVar5(value);
+        break;
+      case "6":
+        setTypeVar6(value);
+        break;
+      default:
+        console.warn(`Unhandled field index: ${index}`);
+    }
+  }
+
 
   return (
     <div className="visualization">
@@ -29,12 +61,19 @@ const Visualization = () => {
       {showCodeEditor ? (
         <>
           <h2>Code Editor</h2>
-          <CodeEditor />
+          <CodeEditor 
+  typeVar1={typeVar1} 
+  typeVar2={typeVar2} 
+  typeVar3={typeVar3} 
+  typeVar4={typeVar4} 
+  typeVar5={typeVar5} 
+  typeVar6={typeVar6} 
+/>
         </>
       ) : (
         <>
           <h2>Input Parameters for Material</h2>
-          <InputFields/>
+          <InputFields onValuesChange={handleValuesChange} values={[typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6]} />
           <h2>Input Parameters for Run Configuration</h2>
           <InputFields/>
           <h2>Input Parameters for Geometry</h2>

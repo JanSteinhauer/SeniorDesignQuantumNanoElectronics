@@ -49,16 +49,26 @@ const HelpText = styled.p`
   display: ${props => props.show ? 'block' : 'none'};
 `;
 
-const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk}) => {
+const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onValueChange }) => {
   const [showHelp, setShowHelp] = useState(false);
+  const [value, setValue] = useState("");  // New state to store the input value
 
+  const handleInputChange = (e) => {
+    setValue(e.target.value);
+    onValueChange && onValueChange(e.target.value);  // Sending value to parent
+  }
   return (
     <Container>
       <Label>
         {labelText} {showAsterisk && <Asterisk> *</Asterisk>}
         <InfoIcon onClick={() => setShowHelp(!showHelp)}>i</InfoIcon>
       </Label>
-      <Input type="text" placeholder={inputPlaceholder} />
+      <Input 
+      type="text" 
+      placeholder={inputPlaceholder} 
+      value={value} 
+      onChange={handleInputChange} 
+    />
       <HelpText show={showHelp}>
         {helpText}
       </HelpText>
