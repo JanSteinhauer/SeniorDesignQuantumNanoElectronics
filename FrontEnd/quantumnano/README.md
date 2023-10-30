@@ -1,5 +1,4 @@
-
-# Risk Reduction Report
+# Jan Steinnhauer Individual Risk Reduction Report
 
 ## Project Information
 
