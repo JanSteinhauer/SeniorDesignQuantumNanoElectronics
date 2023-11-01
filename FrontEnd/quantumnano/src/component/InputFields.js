@@ -31,12 +31,14 @@ const InputFields = ({ onValuesChange, values = [] }) => {
     <InputFieldsContainer>
       <Row>
         <InputField 
-          value={values[0]}
-          labelText="Field 1" 
-          inputPlaceholder={values[0]}
+          labelText="Field test" 
+          // inputPlaceholder={values[0]}
           helpText="Help text for Field 1" 
+          inputPlaceholder="Placeholder 1" 
           showAsterisk={true}
           onValueChange={(value) => handleValueChange("Field 1", value)} 
+          min={0}  // Lower bound for Field 1
+          max={100} // Upper bound for Field 1
         />
         <InputField 
           labelText="Field 2" 
@@ -44,6 +46,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
           helpText="Help text for Field 2" 
           showAsterisk={false}
           onValueChange={(value) => handleValueChange("Field 2", value)} 
+          min={0}  // Lower bound for Field 1
+          max={100} // Upper bound for Field 1
         />
         <InputField 
           labelText="Field 3" 
@@ -51,6 +55,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
           helpText="Help text for Field 3" 
           showAsterisk={true}
           onValueChange={(value) => handleValueChange("Field 3", value)} 
+          min={0}  // Lower bound for Field 1
+          max={100} // Upper bound for Field 1
         />
       </Row>
       <Row>
@@ -60,6 +66,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
           helpText="Help text for Field 4" 
           showAsterisk={false}
           onValueChange={(value) => handleValueChange("Field 4", value)} 
+          min={0}  // Lower bound for Field 1
+          max={100} // Upper bound for Field 1
         />
         <InputField 
           labelText="Field 5" 
@@ -67,6 +75,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
           helpText="Help text for Field 5" 
           showAsterisk={true}
           onValueChange={(value) => handleValueChange("Field 5", value)} 
+          min={0}  // Lower bound for Field 1
+          max={100} // Upper bound for Field 1
         />
         <InputField 
           labelText="Field 6" 
@@ -74,6 +84,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
           helpText="Help text for Field 6" 
           showAsterisk={false}
           onValueChange={(value) => handleValueChange("Field 6", value)} 
+          min={0}  // Lower bound for Field 1
+          max={100} // Upper bound for Field 1
         />
       </Row>
     </InputFieldsContainer>

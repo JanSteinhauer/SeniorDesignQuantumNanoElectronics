@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types'; // Make sure this import is added
+
 
 const Container = styled.div`
   width: 300px;
@@ -49,13 +51,46 @@ const HelpText = styled.p`
   display: ${props => props.show ? 'block' : 'none'};
 `;
 
-const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onValueChange }) => {
-  const [showHelp, setShowHelp] = useState(false);
-  const [value, setValue] = useState("");  // New state to store the input value
+const debounce = (func, wait) => {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
+const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onValueChange, min, max }) => {
+  const [value, setValue] = useState("");
+  const [showHelp, setShowHelp] = useState(false); // Define the showHelp state
+
+  const debouncedValidation = useCallback(debounce((newValue) => {
+    // Check if newValue is a number
+    if (isNaN(newValue)) {
+      alert('Please enter a valid number');
+      setValue('');
+      return;
+    }
+
+    // Check the bounds
+    if (newValue < min || newValue > max) {
+      alert(`Value must be between ${min} and ${max}`);
+      setValue('');
+      return;
+    }
+
+    setValue(newValue);
+    onValueChange && onValueChange(newValue);
+  }, 350), []);
 
   const handleInputChange = (e) => {
-    setValue(e.target.value);
-    onValueChange && onValueChange(e.target.value);  // Sending value to parent
+    const newValue = e.target.value;
+    setValue(newValue); // Update the value immediately for a responsive UI
+    debouncedValidation(newValue); // Validate with a delay
   }
   return (
     <Container>
@@ -64,16 +99,26 @@ const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onVal
         <InfoIcon onClick={() => setShowHelp(!showHelp)}>i</InfoIcon>
       </Label>
       <Input 
-      type="text" 
-      placeholder={inputPlaceholder} 
-      value={value} 
-      onChange={handleInputChange} 
-    />
+        type="text" 
+        placeholder={inputPlaceholder} 
+        value={value} 
+        onChange={handleInputChange} 
+      />
       <HelpText show={showHelp}>
         {helpText}
       </HelpText>
     </Container>
   );
-}
+};
+
+InputField.propTypes = {
+  labelText: PropTypes.string.isRequired,
+  inputPlaceholder: PropTypes.string,
+  helpText: PropTypes.string,
+  showAsterisk: PropTypes.bool,
+  onValueChange: PropTypes.func.isRequired,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired
+};
 
 export default InputField;

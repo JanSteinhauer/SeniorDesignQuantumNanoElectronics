@@ -109,7 +109,32 @@ const FileDropIn = () => {
     const [dragging, setDragging] = useState(false);
     const [uploadedFile, setUploadedFile] = useState(null);
     const fileInputRef = useRef(null);  // A ref to reference the hidden file input
-
+    const csvToJson = (csv) => {
+      const lines = csv.split("\n");
+      const headers = lines[0].split(",");
+      
+      // Check if 'Metal' and 'Insulator' are present in the headers
+      if (!headers.includes("Metal;2\r") ) {
+        throw new Error("CSV must contain 'Metal' and 'Insulator' headers.");
+      }
+    
+      const jsonResult = [];
+    
+      for (let i = 1; i < lines.length; i++) {
+        const currentLine = lines[i].split(",");
+        const jsonObj = {};
+    
+        for (let j = 0; j < headers.length; j++) {
+          jsonObj[headers[j]] = currentLine[j];
+        }
+    
+        jsonResult.push(jsonObj);
+      }
+    
+      return jsonResult;
+    };
+    
+    
   
     const onDragOver = useCallback((e) => {
       e.preventDefault();
@@ -126,30 +151,37 @@ const FileDropIn = () => {
     }, []);
   
     const onDrop = useCallback((e) => {
-        e.preventDefault();
-        setDragging(false);
-      
-        const files = e.dataTransfer.files;
-        if (files && files.length > 0) {
+      e.preventDefault();
+      setDragging(false);
+    
+      const files = e.dataTransfer.files;
+      if (files && files.length > 0) {
           const file = files[0];
       
           // Check if the file is a CSV file
           if (file.type !== "text/csv") {
-            console.error("Dropped file is not a CSV file");
-            return;
+              alert("Dropped file is not a CSV file. Please upload a .csv file.");
+              return;
           }
       
           const reader = new FileReader();
       
           reader.onload = (event) => {
             const content = event.target.result;
-            const jsonData = csvToJson(content); // Convert the CSV to JSON
-            console.log(jsonData);
-          };
-      
-          reader.onerror = (error) => {
-            console.error("Error reading CSV file", error);
-          };
+            try {
+                const jsonData = csvToJson(content); // Convert the CSV to JSON
+                console.log(jsonData);
+                setUploadedFile(file.name);
+            } catch (error) {
+                console.error("Error converting CSV to JSON", error);
+                alert("Error converting CSV to JSON");
+            }
+        };
+        reader.onerror = (error) => {
+          console.error("Error reading CSV file", error);
+          alert("Error reading the file");
+      };
+  
       
           reader.readAsText(file);
 
@@ -162,11 +194,40 @@ const FileDropIn = () => {
         fileInputRef.current.click();
       };
       const onFileChange = (e) => {
-        if (e.target.files && e.target.files.length > 0) {
-          setUploadedFile(e.target.files[0].name);
-          // You can also process the file here if needed
+        const files = e.target.files;
+        if (files && files.length > 0) {
+          const file = files[0];
+          if (file.type !== "text/csv") {
+            alert("Selected file is not a CSV file. Please upload a .csv file.");
+            return;
+          }
+          setUploadedFile(file.name);
+      
+          // Continue with file processing if needed
+          const reader = new FileReader();
+      
+          reader.onload = (event) => {
+            const content = event.target.result;
+            try {
+              const jsonData = csvToJson(content); // Convert the CSV to JSON
+              console.log(jsonData);
+              // Here you can handle the jsonData, for example:
+              // this.props.onFileProcessed(jsonData);
+            } catch (error) {
+              console.error("Error converting CSV to JSON", error);
+              alert("Error converting CSV to JSON");
+            }
+          };
+      
+          reader.onerror = (error) => {
+            console.error("Error reading CSV file", error);
+            alert("Error reading the file");
+          };
+      
+          reader.readAsText(file);
         }
       };
+
   
       const fileInputLabel = dragging ? "Release to drop" : "Select a file or drag and drop here";
 
