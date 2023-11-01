@@ -24,6 +24,28 @@ const Visualization = () => {
   const [typeVar5, setTypeVar5] = useState("15");
   const [typeVar6, setTypeVar6] = useState("16");
 
+  const createAndDownloadCSV = () => {
+    const filename = 'visualization_params.csv';
+    const values = [typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6];
+    const headers = ["Variable1", "Variable2", "Variable3", "Variable4", "Variable5", "Variable6"];
+    let csvContent = "data:text/csv;charset=utf-8,";
+
+    // Add headers
+    csvContent += headers.join(",") + "\r\n";
+
+    // Add the values
+    csvContent += values.join(",") + "\r\n";
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', filename);
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the CSV file
+    document.body.removeChild(link); // Clean up
+  }
+
   const handleValuesChange = (index, value) => {
     switch(index) {
       case "1": 
@@ -80,7 +102,8 @@ const Visualization = () => {
           <InputFields/>
         </>
       )}
-      <Button heading={"Start Visualization"}/>
+    <Button heading={"Start Visualization"} onClick={createAndDownloadCSV} />
+
     </div>
   );
 };

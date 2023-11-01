@@ -18,8 +18,8 @@ const StyledButton = styled.button`
   }
 `;
 
-const Button = ({ heading }) => {
-  return <StyledButton>{heading}</StyledButton>;
+const Button = ({ heading, onClick }) => {
+  return <StyledButton onClick={onClick}>{heading}</StyledButton>;
 };
 
 export default Button;
