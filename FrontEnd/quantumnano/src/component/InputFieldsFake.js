@@ -20,7 +20,7 @@ const InputFieldsContainer = styled.div`
 `;
 
 
-const InputFields = ({ onValuesChange, values = [] }) => {
+const InputFieldsFake = ({ onValuesChange, values = [] }) => {
 
   const handleValueChange = (field, value) => {
     const index = field.replace('Field ', '');  // Extracting index from field name
@@ -31,18 +31,18 @@ const InputFields = ({ onValuesChange, values = [] }) => {
     <InputFieldsContainer>
       <Row>
         <InputField 
-          labelText="Metal" 
+          labelText="Field test" 
           // inputPlaceholder={values[0]}
           helpText="Help text for Field 1" 
-          inputPlaceholder="Metal Value" 
+          inputPlaceholder="Placeholder 1" 
           showAsterisk={true}
           onValueChange={(value) => handleValueChange("Field 1", value)} 
           min={0}  // Lower bound for Field 1
           max={100} // Upper bound for Field 1
         />
         <InputField 
-          labelText="Insulator" 
-          inputPlaceholder="Insulator Value" 
+          labelText="Field 2" 
+          inputPlaceholder="Placeholder 2" 
           helpText="Help text for Field 2" 
           showAsterisk={false}
           onValueChange={(value) => handleValueChange("Field 2", value)} 
@@ -50,8 +50,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
           max={100} // Upper bound for Field 1
         />
         <InputField 
-          labelText="Weyl 1" 
-          inputPlaceholder="Weyl 1 Value" 
+          labelText="Field 3" 
+          inputPlaceholder="Placeholder 3" 
           helpText="Help text for Field 3" 
           showAsterisk={true}
           onValueChange={(value) => handleValueChange("Field 3", value)} 
@@ -61,8 +61,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
       </Row>
       <Row>
         <InputField 
-          labelText="Weyl 2" 
-          inputPlaceholder="Weyl 2 Value" 
+          labelText="Field 4" 
+          inputPlaceholder="Placeholder 4" 
           helpText="Help text for Field 4" 
           showAsterisk={false}
           onValueChange={(value) => handleValueChange("Field 4", value)} 
@@ -70,8 +70,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
           max={100} // Upper bound for Field 1
         />
         <InputField 
-          labelText="Weyl 3" 
-          inputPlaceholder="Weyl 3 Value" 
+          labelText="Field 5" 
+          inputPlaceholder="Placeholder 5" 
           helpText="Help text for Field 5" 
           showAsterisk={true}
           onValueChange={(value) => handleValueChange("Field 5", value)} 
@@ -79,8 +79,8 @@ const InputFields = ({ onValuesChange, values = [] }) => {
           max={100} // Upper bound for Field 1
         />
         <InputField 
-          labelText="Chern 2D" 
-          inputPlaceholder="Chern 2D Value" 
+          labelText="Field 6" 
+          inputPlaceholder="Placeholder 6" 
           helpText="Help text for Field 6" 
           showAsterisk={false}
           onValueChange={(value) => handleValueChange("Field 6", value)} 
@@ -91,4 +91,4 @@ const InputFields = ({ onValuesChange, values = [] }) => {
     </InputFieldsContainer>
   );
 }
-export default InputFields;
+export default InputFieldsFake;
