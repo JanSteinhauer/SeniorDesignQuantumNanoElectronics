@@ -109,14 +109,17 @@ const FileDropIn = () => {
     const [dragging, setDragging] = useState(false);
     const [uploadedFile, setUploadedFile] = useState(null);
     const fileInputRef = useRef(null);  // A ref to reference the hidden file input
+
+
     const csvToJson = (csv) => {
       const lines = csv.split("\n");
       const headers = lines[0].split(",");
       
-      // Check if 'Metal' and 'Insulator' are present in the headers
-      if (!headers.includes("Metal;2\r") ) {
+      // // Check if 'Metal' and 'Insulator' are present in the headers
+      if (!headers.includes("Metal") ) {
         throw new Error("CSV must contain 'Metal' and 'Insulator' headers.");
       }
+      console.log("header", headers)
     
       const jsonResult = [];
     
@@ -174,7 +177,10 @@ const FileDropIn = () => {
                 setUploadedFile(file.name);
             } catch (error) {
                 console.error("Error converting CSV to JSON", error);
-                alert("Error converting CSV to JSON");
+                alert("CSV must contain 'Metal' and 'Insulator' headers.");
+                setUploadedFile(null); // Prevent the preview if there's an error
+
+                return;
             }
         };
         reader.onerror = (error) => {
@@ -194,6 +200,7 @@ const FileDropIn = () => {
         fileInputRef.current.click();
       };
       const onFileChange = (e) => {
+        let problem = false
         const files = e.target.files;
         if (files && files.length > 0) {
           const file = files[0];
@@ -214,8 +221,12 @@ const FileDropIn = () => {
               // Here you can handle the jsonData, for example:
               // this.props.onFileProcessed(jsonData);
             } catch (error) {
-              console.error("Error converting CSV to JSON", error);
-              alert("Error converting CSV to JSON");
+              console.error("CSV must contain 'Metal' and 'Insulator' headers.", error);
+              alert("CSV must contain 'Metal' and 'Insulator' headers2222.");
+              problem = true
+              setUploadedFile(null); // Prevent the preview if there's an error
+
+              return;
             }
           };
       
@@ -223,8 +234,11 @@ const FileDropIn = () => {
             console.error("Error reading CSV file", error);
             alert("Error reading the file");
           };
-      
-          reader.readAsText(file);
+          if(!problem){
+            console.log("problem", problem)
+            reader.readAsText(file);
+          }
+         
         }
       };
 
