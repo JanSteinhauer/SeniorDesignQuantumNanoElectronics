@@ -12,6 +12,7 @@ import ToggleSwitch from '../component/ToggleSwitch';
 
 import InputFieldsFake from '../component/InputFieldsFake';
 import quantumImage from '../assets/images/quantum.png';
+import axios from 'axios';
 
 
 
@@ -23,16 +24,46 @@ const ToggleSwitchContainer = styled.div`
 
 const Visualization = () => {
   const [showImage, setShowImage] = useState(false);
+  const [image, setImage] = useState(null);
+
+  const fetchImage = async () => {
+    try {
+      const response = await axios.get('https://api.unsplash.com/search/photos', {
+        params: { query: 'graph visualisation' }, // Change 'nature' to whatever search term you want
+        headers: {
+          Authorization: 'Client-ID WSJ6iVewCRNKkNpLIKicKVAZpzACaZLBjNAeX4uuh0I' // Replace YOUR_UNSPLASH_ACCESS_KEY with your actual key
+        }
+      });
+
+      // Set the first image from the results, if available
+      if (response.data.results.length > 0) {
+        setImage(response.data.results[0]);
+      }
+    } catch (error) {
+      console.error("Error fetching image from Unsplash:", error);
+    }
+  };
+
 
 
   const handleButtonClick = () => {
-    setShowImage(true);
+    // setShowImage(true);
+    const url = "https://colab.research.google.com/github/nestauk/im-tutorials/blob/3-ysi-tutorial/notebooks/APIs/API_tutorial.ipynb";
+    window.open(url, '_blank');
   };
   return (
     <div className="visualization">
       <h1>Drop in your Julia file to get a Visualization 🌌</h1>
       <FileDropIn/>
-    <Button heading={"Start Visualization"} onClick={handleButtonClick} />
+    <Button heading={"Start Google Colab"} onClick={handleButtonClick} />
+    <div>
+    <Button heading={"Start Visualization"} onClick={fetchImage} />
+    </div>
+    <div>
+    {image && <img src={image.urls.small} alt={image.alt_description} />}
+
+    </div>
+
     {showImage && (
       <img src={quantumImage} alt="Quantum Visualization" style={{ display: 'block', margin: 'auto' }} />
       )}
