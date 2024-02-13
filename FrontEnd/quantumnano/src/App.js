@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import Visualization from './pages/Visualization'; 
 import Script from './pages/Script'
 import Peoples from './pages/Peoples';
+import Blog from './pages/Blog';
+
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
           <Route path="/visualization" element={<Visualization />} />
           <Route path="/script" element={<Script />} />
           <Route path="/people" element={<Peoples />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </div>
     </Router>
