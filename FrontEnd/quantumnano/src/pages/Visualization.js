@@ -58,6 +58,7 @@ const Visualization = () => {
     <Button heading={"Start Google Colab"} onClick={handleButtonClick} />
     <div>
     <Button heading={"Start Visualization"} onClick={fetchImage} />
+
     </div>
     <div>
     {image && <img src={image.urls.small} alt={image.alt_description} />}
