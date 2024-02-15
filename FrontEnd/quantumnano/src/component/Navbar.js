@@ -50,7 +50,7 @@ const NavBar = () => {
       <NavItem to="/script">Script</NavItem>
       <NavItem to="/visualization">Visualization</NavItem>
       <NavItem to="/people">People</NavItem>
-      <NavItem to="/blog">Blog</NavItem>
+      <NavItem to="/blog">News</NavItem>
     </Navbar>
   );
 };
