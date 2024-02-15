@@ -29,7 +29,7 @@ const Peoples = () => {
   profileImageSrc="https://i.ibb.co/JBQDqKR/default.jpg" 
   profileAltText="profile image"
   name="Ken Zhang" 
-  role="Front End Developer" 
+  role="Back End Developer" 
   affiliation="UT Austin"
   email = "kenzhang@utexas.edu"
   githubLink = "https://github.com/ktzhang20"
