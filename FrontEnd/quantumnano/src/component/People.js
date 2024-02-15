@@ -161,7 +161,7 @@ const Image = () => (<>
   </HeaderImage>
 </>)
 
-const People = ({ profileImageSrc, profileAltText, name, role, email, githubLink, linkedInLink }) => {
+const People = ({ profileImageSrc, profileAltText, name, role, affiliation, email, githubLink, linkedInLink }) => {
   let app = useRef(null);
     let card = useRef(null);
     let img = useRef(null);
@@ -211,6 +211,7 @@ const People = ({ profileImageSrc, profileAltText, name, role, email, githubLink
                 <ContentContainer ref={content}>
                   <h2>{name}</h2>
                   <h3>{role}</h3>
+                  <h3>{affiliation}</h3>
                   <ContactIcons>
                     <a href={githubLink} target="_blank" rel="noopener noreferrer">
                       <FaGithub size="24px" />
