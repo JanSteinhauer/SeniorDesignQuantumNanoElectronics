@@ -46,7 +46,7 @@ const NavBar = () => {
         <SvgIcon/>
       </NavItem>
       <NavItem to="/">Home</NavItem>
-      <NavItem to="/support">Support</NavItem>
+      <NavItem to="/documentation">Documentation</NavItem>
       <NavItem to="/script">Script</NavItem>
       <NavItem to="/visualization">Visualization</NavItem>
       <NavItem to="/people">People</NavItem>
