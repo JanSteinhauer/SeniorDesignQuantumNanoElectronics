@@ -7,7 +7,7 @@ import Visualization from './pages/Visualization';
 import Script from './pages/Script'
 import Peoples from './pages/Peoples';
 import Blog from './pages/Blog';
-
+import Documentation from './pages/Dokumentation';
 
 function App() {
   return (
@@ -20,6 +20,7 @@ function App() {
           <Route path="/script" element={<Script />} />
           <Route path="/people" element={<Peoples />} />
           <Route path="/blog" element={<Blog />} />
+          <Route path="/documentation" element={<Documentation />} />
         </Routes>
       </div>
     </Router>

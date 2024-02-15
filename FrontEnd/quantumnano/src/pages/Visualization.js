@@ -48,7 +48,7 @@ const Visualization = () => {
 
   const handleButtonClick = () => {
     // setShowImage(true);
-    const url = "https://colab.research.google.com/github/nestauk/im-tutorials/blob/3-ysi-tutorial/notebooks/APIs/API_tutorial.ipynb";
+    const url = "https://colab.research.google.com/drive/19NveoRpS07f5atTti2Hdu-E_YvqP2-sc?usp=sharing";
     window.open(url, '_blank');
   };
   return (
@@ -69,6 +69,7 @@ const Visualization = () => {
       <img src={quantumImage} alt="Quantum Visualization" style={{ display: 'block', margin: 'auto' }} />
       )}
     </div>
+    
   );
 };
 
