@@ -31,19 +31,20 @@ const NavItem = styled(Link)`
     color: black;
   }
 
-  svg {
-    width: 24px; // Set explicit width and height for the SVG
-    height: 24px;
+  img {
+    width: 65px; // Set explicit width and height for the SVG
+    height: 65px;
     margin-top: -15px; // Set top and bottom margin to -15px
     margin-bottom: -15px;
   }
+
 `;
 
 const NavBar = () => {
   return (
     <Navbar>
       <NavItem to="/" primary>
-        <SvgIcon/>
+       <img src="https://i.ibb.co/sWDGLpf/image.png"></img>
       </NavItem>
       <NavItem to="/">Home</NavItem>
       <NavItem to="/documentation">Documentation</NavItem>

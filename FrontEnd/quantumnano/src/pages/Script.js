@@ -97,6 +97,7 @@ const Script = () => {
 
   return (
     <div className="visualization">
+      
       <h1>Input your parameters to get a Julia Script 🧮</h1>
       <FileDropIn/>
       <ToggleSwitchContainer>

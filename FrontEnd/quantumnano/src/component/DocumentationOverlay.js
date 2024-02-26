@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NavSidebar from './NavSidebar';
+import DocumentationPanel from './Panel'
 
 
 const Background = styled.div`
@@ -87,26 +88,75 @@ const Button = styled.a`
 
 const DocumentationOverlay = () => {
 
-    // State for managing the title
-    const [title, setTitle] = useState('Doc 1');
+  const [title, setTitle] = useState('');
+  const [description1, setDescription1] = useState('');
+  const [description2, setDescription2] = useState('');
+  const SafeHtml = ({ html }) => <div dangerouslySetInnerHTML={{ __html: html }} />;
 
-    // Function to update the title
-    const handleLinkClick = (newTitle) => {
-    setTitle(newTitle);
-    };
+  const documents = {
+    'Material Determination Tutorial': {
+      title: "Material Determination Tutorial",
+      description1: "An example - Material Determination <br> To determine the material type based on position coordinates, follow these<br>steps:<br>1. Define the position coordinates using a Vector{Float64}.<br>R = [x, y, z]<br>2. Call the geometry function to determine the material type.<br>material_type = geometry(R) <br>The geometry function returns a string indicating the material type<br>(insulator or GaAs).",
+      description2: "The `geometry_params` named tuple contains parameters crucial for defining the device's geometry, including the matrix of unit cell lattice vectors and the number of times to tile the cell over space.",
+    },
+    'Doc 2': {
+      title: "Document 2 Title",
+      description1: "Description 1 for Document 2...",
+      description2: "Description 2 for Document 2...",
+    },
+    'Doc 3': {
+      title: "Document 3 Title",
+      description1: "Description 1 for Document 3...",
+      description2: "Description 2 for Document 3...",
+    },
+    'Doc 4': {
+      title: "Document 4 Title",
+      description1: "Description 1 for Document 4...",
+      description2: "Description 2 for Document 4...",
+    },
+    'Doc 5': {
+      title: "Document 5 Title",
+      description1: "Description 1 for Document 5...",
+      description2: "Description 2 for Document 5...",
+    },
+   
+  };
+
+  useEffect(() => {
+    // Initialize with the first document, for example
+    const initialDocKey = 'Material Determination Tutorial';
+    handleLinkClick(initialDocKey);
+  }, []); // The empty dependency array ensures this runs once on mount
+  
+  
+
+  // // Simulate fetching data from a document or an API
+  // useEffect(() => {
+  //   setTitle("Material Determination Tutorial");
+  //   setDescription1("An example - Material Determination <br> To determine the material type based on position coordinates, follow these<br>steps:<br>1. Define the position coordinates using a Vector{Float64}.<br>R = [x, y, z]<br>2. Call the geometry function to determine the material type.<br>material_type = geometry(R) <br>The geometry function returns a string indicating the material type<br>(insulator or GaAs).");
+  //   setDescription2("The `geometry_params` named tuple contains parameters crucial for defining the device's geometry, including the matrix of unit cell lattice vectors and the number of times to tile the cell over space.");
+  // }, []); // Empty dependency array means this effect runs once on mount
+
+
+  const handleLinkClick = (docKey) => {
+    const doc = documents[docKey];
+    if (doc) {
+      setTitle(doc.title);
+      setDescription1(doc.description1);
+      setDescription2(doc.description2);
+    }
+  };
+  
+    // // Function to update the title
+    // const handleLinkClick = (newTitle) => {
+    // setTitle(newTitle);
+   
+    // };
 
   return (
     <Background>
        <NavSidebar onLinkClick={handleLinkClick} />
-      <Panel>
-        <Title>{title}</Title>
-        <CardText>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum tenetur vel accusamus. Cumque, iste asperiores. Perferendis odio magnam nisi, eos provident nobis maxime nostrum nam, ipsum blanditiis quasi saepe aliquid!</p>
-        </CardText>
-        <CardText>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum tenetur vel accusamus. Cumque, iste asperiores. Perferendis odio magnam nisi, eos provident nobis maxime nostrum nam, ipsum blanditiis quasi saepe aliquid!</p>
-        </CardText>
-      </Panel>
+       <DocumentationPanel title={title} description1={description1} description2={description2} />
     </Background>
   );
 };
