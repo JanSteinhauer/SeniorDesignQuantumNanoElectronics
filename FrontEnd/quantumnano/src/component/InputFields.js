@@ -1,72 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputField from './InputField';
 import DropDown from './DropDown';
 
-
 const Container = styled.div`
-  // width: 300px;
-  // margin: 0 auto;
-  // padding: 20px;
-  // box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 20px;
 `;
 
-
-
-
 const InputFields = () => {
   const [selectedOption, setSelectedOption] = useState(null);
-  const handleValueChange = (field, value) => {
-    console.log(`Field: ${field}, Value: ${value}`);
-    // You can perform any other actions with the value, e.g., update state
+  // Initialize inputValues state with an array of empty strings or default values
+  const [inputValues, setInputValues] = useState(Array(6).fill('')); // Assuming 6 input fields
+
+  const handleValueChange = (index, value) => {
+    // Update the specific value based on the index
+    const updatedValues = inputValues.map((val, i) => i === index ? value : val);
+    setInputValues(updatedValues);
   };
 
-
- 
   const handleDropdownSelect = (option) => {
     setSelectedOption(option);
   };
 
-
   const setValuesBasedOnOption = () => {
-    // Implement logic to set values based on the selectedOption
+    // Logic to set values based on the selectedOption
     console.log('Setting values based on option:', selectedOption);
     switch (selectedOption?.value) {
-      case 'Defaults':
-        // Set all input values to 0
-        for (let i = 1; i <= 6; i++) {
-          handleValueChange(`Field ${i}`, 0);
-        }
+      case 'defaults':
+        // setInputValues(Array(6).fill(0)); // Set all input values to 0 for "Defaults"
         break;
-      case 'presetOne': // first example test
-        // Set values for Preset One
-        handleValueChange('Field 1', 1);
-        handleValueChange('Field 2', 23);
-        handleValueChange('Field 3', 22);
-        handleValueChange('Field 4', 44);
-        handleValueChange('Field 5', 5);
-        handleValueChange('Field 6', 90);
+      case 'presetOne':
+        // Set values for "Preset One"
+        const presetValues = [1, 23, 22, 44, 5, 90];
+        setInputValues(presetValues);
         break;
-      // more cases for additional options as needed
+      case 'presetTwo':
+        const presetValues2 = [3, 3, 32, 55, 42, 60];
+        setInputValues(presetValues2);
+        break;
+      // Add more cases as needed
       default:
-      // do nothing
+        setInputValues(Array(6).fill('')); // Reset or clear values
         break;
     }
   };
 
-
-
-
-  React.useEffect(() => {
+  useEffect(() => {
     setValuesBasedOnOption();
   }, [selectedOption]);
 
-
-return (
+  return (
     <Container>
       <DropDown
         options={[
@@ -78,14 +64,15 @@ return (
         selectedOption={selectedOption}
         onSelect={handleDropdownSelect}
       />
-      {Array.from({ length: 6 }, (_, i) => (
+      {inputValues.map((value, index) => (
         <InputField
-          key={i}
-          labelText={`Field ${i + 1}`}
-          inputPlaceholder={selectedOption ? `${selectedOption.label}` : `Field ${i + 1} Value`}
-          helpText={`Help text for Field ${i + 1}`}
+          key={index}
+          labelText={`Field ${index + 1}`}
+          inputPlaceholder={`Field ${index + 1} Value`}
+          helpText={`Help text for Field ${index + 1}`}
           showAsterisk={true}
-          onValueChange={(value) => handleValueChange(`Field ${i + 1}`, value)}
+          value={value} // Pass the current value to each InputField
+          onValueChange={(newValue) => handleValueChange(index, newValue)}
           min={0}
           max={100}
         />
@@ -93,6 +80,5 @@ return (
     </Container>
   );
 };
-
 
 export default InputFields;

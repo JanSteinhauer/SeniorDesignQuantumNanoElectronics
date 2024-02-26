@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types'; // Make sure this import is added
 
@@ -58,10 +58,13 @@ const HelpText = styled.p`
   display: ${props => props.show ? 'block' : 'none'};
 `;
 
-
 const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onValueChange, min, max, value }) => {
   const [inputValue, setInputValue] = useState(value || '');
 
+  useEffect(() => {
+    // This effect updates the internal state whenever the value prop changes
+    setInputValue(value);
+  }, [value]);
 
   const debounce = (func, wait) => {
     let timeout;
@@ -70,50 +73,35 @@ const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onVal
         clearTimeout(timeout);
         func(...args);
       };
- 
+
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
     };
   };
 
-
- 
   const debouncedValidation = useCallback(
     debounce((newValue) => {
-      // Check if newValue is a number
-      if (isNaN(newValue)) {
-        alert('Please enter a valid number');
+      // Validations...
+      if (!isNaN(newValue) && newValue >= min && newValue <= max) {
+        setInputValue(newValue);
+        onValueChange && onValueChange(newValue);
+      } else {
         setInputValue('');
-        return;
+        onValueChange && onValueChange('');
       }
-
-
-      // Check the bounds
-      if (newValue < min || newValue > max) {
-        alert(`Value must be between ${min} and ${max}`);
-        setInputValue('');
-        return;
-      }
-
-
-      setInputValue(newValue);
-      onValueChange && onValueChange(newValue);
     }, 350),
-    []
+    [min, max, onValueChange]
   );
-
 
   const handleInputChange = (e) => {
     const newValue = e.target.value;
-    setInputValue(newValue);
     debouncedValidation(newValue);
   };
-
 
   return (
     <Container>
       <Label>
-        {labelText} {showAsterisk && <Asterisk> *</Asterisk>}
+        {labelText} {showAsterisk && <Asterisk>*</Asterisk>}
         <InfoIcon>i</InfoIcon>
       </Label>
       <Input
@@ -122,10 +110,11 @@ const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onVal
         value={inputValue}
         onChange={handleInputChange}
       />
-      <HelpText>{helpText}</HelpText>
+      <HelpText show={!!helpText}>{helpText}</HelpText>
     </Container>
   );
 };
+
 
 
 
