@@ -13,7 +13,7 @@ const Sidebar = styled.div`
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   height: 100vh;
   width: 250px;
-  position: fixed;
+  position: absolute;
   top: 80px;
   left: 0;
   display: flex;
@@ -40,7 +40,7 @@ const NavLink = styled.a`
 const NavSidebar = ({ onLinkClick }) => {
     return (
       <Sidebar>
-        <NavLink href="#" onClick={() => onLinkClick('Doc 1')}>Doc 1</NavLink>
+        <NavLink href="#" onClick={() => onLinkClick('Material Determination Tutorial')}>Tutorial</NavLink>
         <NavLink href="#" onClick={() => onLinkClick('Doc 2')}>Doc 2</NavLink>
         <NavLink href="#" onClick={() => onLinkClick('Doc 3')}>Doc 3</NavLink>
         <NavLink href="#" onClick={() => onLinkClick('Doc 4')}>Doc 4</NavLink>
