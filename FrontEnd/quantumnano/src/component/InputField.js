@@ -2,9 +2,6 @@ import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types'; // Make sure this import is added
 
-
-
-
 const Container = styled.div`
   width: 300px;
   margin: 0 auto;
@@ -12,11 +9,10 @@ const Container = styled.div`
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
-
 const Label = styled.label`
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 5px;
   position: relative;
   background-color: transparent;
@@ -42,7 +38,6 @@ const InfoIcon = styled.span`
 const Asterisk = styled.span`
   color: red;
 `;
-
 
 const Input = styled.input`
   width: 100%;
@@ -115,12 +110,6 @@ const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onVal
   );
 };
 
-
-
-
-
-
-
 InputField.propTypes = {
   labelText: PropTypes.string.isRequired,
   inputPlaceholder: PropTypes.string,
@@ -131,6 +120,5 @@ InputField.propTypes = {
   max: PropTypes.number.isRequired,
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // Ensure value can be a string or number
 };
-
 
 export default InputField;

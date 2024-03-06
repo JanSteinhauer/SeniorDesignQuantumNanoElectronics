@@ -108,22 +108,25 @@ const Script = () => {
         <>
           <h2>Code Editor</h2>
           <CodeEditor 
-  typeVar1={typeVar1} 
-  typeVar2={typeVar2} 
-  typeVar3={typeVar3} 
-  typeVar4={typeVar4} 
-  typeVar5={typeVar5} 
-  typeVar6={typeVar6} 
-/>
+            typeVar1={typeVar1} 
+            typeVar2={typeVar2} 
+            typeVar3={typeVar3} 
+            typeVar4={typeVar4} 
+            typeVar5={typeVar5} 
+            typeVar6={typeVar6} 
+          />
         </>
       ) : (
         <>
-          <h2>Input Parameters for Material</h2>
+          {/* <h2>Input Parameters for Material</h2> */}
+          <InputFields onValuesChange={handleValuesChange} values={[typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6]} />
+          {/* <h2>Input Parameters for Geometry</h2>
           <InputFields onValuesChange={handleValuesChange} values={[typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6]} />
           <h2>Input Parameters for Run Configuration</h2>
-          <InputFieldsFake/>
-          <h2>Input Parameters for Geometry</h2>
-          <InputFieldsFake/>
+          <InputFields onValuesChange={handleValuesChange} values={[typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6]} />
+          <h2>Testing</h2>
+          <InputFieldsFake/> */}
+
         </>
       )}
   
