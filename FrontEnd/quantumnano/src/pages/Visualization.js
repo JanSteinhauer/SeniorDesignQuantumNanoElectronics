@@ -52,25 +52,31 @@ const Visualization = () => {
     window.open(url, '_blank');
   };
   return (
-    <div className="visualization">
-      <h1>Drop in your Julia file to get a Visualization 🌌</h1>
-      <FileDropIn/>
-    <Button heading={"Start Google Colab"} onClick={handleButtonClick} />
-    <div>
-    <Button heading={"Start Visualization"} onClick={fetchImage} />
-
-    </div>
-    <div>
-    {image && <img src={image.urls.small} alt={image.alt_description} />}
-
-    </div>
-
-    {showImage && (
-      <img src={quantumImage} alt="Quantum Visualization" style={{ display: 'block', margin: 'auto' }} />
-      )}
-    </div>
     
+    <div>
+    <iframe src="https://ffc3-209-166-123-129.ngrok-free.app" title="Ngrok Content" style={{width: '100%', height: '800px', border: 'none'}}></iframe>
+
+    </div>
   );
 };
 
 export default Visualization;
+
+// <div className="visualization">
+//       <h1>Drop in your Julia file to get a Visualization 🌌</h1>
+//       <FileDropIn/>
+//     <Button heading={"Start Google Colab"} onClick={handleButtonClick} />
+//     <div>
+//     <Button heading={"Start Visualization"} onClick={fetchImage} />
+
+//     </div>
+
+//     <div>
+//     {image && <img src={image.urls.small} alt={image.alt_description} />}
+
+//     </div>
+
+//     {showImage && (
+//       <img src={quantumImage} alt="Quantum Visualization" style={{ display: 'block', margin: 'auto' }} />
+//       )}
+//     </div>
