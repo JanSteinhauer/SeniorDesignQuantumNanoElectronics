@@ -61,22 +61,3 @@ const Visualization = () => {
 };
 
 export default Visualization;
-  
-// <div className="visualization">
-//       <h1>Drop in your Julia file to get a Visualization 🌌</h1>
-//       <FileDropIn/>
-//     <Button heading={"Start Google Colab"} onClick={handleButtonClick} />
-//     <div>
-//     <Button heading={"Start Visualization"} onClick={fetchImage} />
-
-//     </div>
-
-//     <div>
-//     {image && <img src={image.urls.small} alt={image.alt_description} />}
-
-//     </div>
-
-//     {showImage && (
-//       <img src={quantumImage} alt="Quantum Visualization" style={{ display: 'block', margin: 'auto' }} />
-//       )}
-//     </div>
