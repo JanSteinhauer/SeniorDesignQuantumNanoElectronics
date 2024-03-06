@@ -61,7 +61,7 @@ const Visualization = () => {
 };
 
 export default Visualization;
-
+ 
 // <div className="visualization">
 //       <h1>Drop in your Julia file to get a Visualization 🌌</h1>
 //       <FileDropIn/>
