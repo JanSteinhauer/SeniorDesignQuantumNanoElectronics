@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Markdown from 'react-markdown'
 
 const Panel = styled.section`
   background-image: linear-gradient(
@@ -48,19 +49,23 @@ const CardText = styled.div`
   margin-bottom: 2em;
 `;
 
-const SafeHtml = ({ html }) => <div dangerouslySetInnerHTML={{ __html: html }} />;
-
 
 // New Component
 const DocumentationPanel = ({ title, description1, description2 }) => {
+  const checkType = (content) => {
+    console.log(`Type of description1: ${typeof content}`);
+  };
+
+  // Call the function to check the type of description1
+  checkType(description1);
   return (
     <Panel>
       <Title>{title}</Title>
       <CardText>
-      <SafeHtml html={description1} />
+      <Markdown>{description1}</Markdown> 
       </CardText>
       <CardText>
-      <SafeHtml html={description2} />
+     
       </CardText>
     </Panel>
   );

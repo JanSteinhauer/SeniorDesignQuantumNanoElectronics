@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import NavSidebar from './NavSidebar';
 import DocumentationPanel from './Panel'
+import Markdown from 'react-markdown'
+
 
 
 const Background = styled.div`
@@ -101,7 +103,7 @@ const DocumentationOverlay = () => {
     },
     'Doc 2': {
       title: "Document 2 Title",
-      description1: "Description 1 for Document 2...",
+      description1: "Description *1* for Document 2...",
       description2: "Description 2 for Document 2...",
     },
     'Doc 3': {
