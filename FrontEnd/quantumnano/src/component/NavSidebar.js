@@ -4,11 +4,7 @@ import styled from 'styled-components';
 
 // Styled component for the sidebar
 const Sidebar = styled.div`
-  background-image: linear-gradient(
-    to right, 
-    rgba(255, 255, 255, 0.1), 
-    rgba(255, 255, 255, 0.1)
-  );
+  background-color: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(5px);
   border-right: 1px solid rgba(255, 255, 255, 0.2);
   height: 100vh;
@@ -21,12 +17,14 @@ const Sidebar = styled.div`
   padding: 20px;
   box-sizing: border-box;
   z-index: 1000;
+  box-shadow: rgba(255, 255, 255, 0.5) -20px -20px 45px inset,
+    rgba(0, 0, 0, 0.1) 10px 10px 20px, rgba(0, 0, 0, 0.06) 5px 5px 10px;
 `;
 
 // Styled component for navigation links
 const NavLink = styled.a`
   margin: 10px 0;
-  color: white;
+
   text-decoration: none;
   font-size: 18px;
   transition: color 0.3s ease-in-out;
@@ -40,8 +38,8 @@ const NavLink = styled.a`
 const NavSidebar = ({ onLinkClick }) => {
     return (
       <Sidebar>
-        <NavLink href="#" onClick={() => onLinkClick('Material Determination Tutorial')}>Tutorial</NavLink>
-        <NavLink href="#" onClick={() => onLinkClick('Doc 2')}>Doc 2</NavLink>
+        <NavLink href="#" onClick={() => onLinkClick('Material Determination Tutorial')}>Geometry</NavLink>
+        <NavLink href="#" onClick={() => onLinkClick('Doc 2')}>Functions</NavLink>
         <NavLink href="#" onClick={() => onLinkClick('Doc 3')}>Doc 3</NavLink>
         <NavLink href="#" onClick={() => onLinkClick('Doc 4')}>Doc 4</NavLink>
         <NavLink href="#" onClick={() => onLinkClick('Doc 5')}>Doc 5</NavLink>

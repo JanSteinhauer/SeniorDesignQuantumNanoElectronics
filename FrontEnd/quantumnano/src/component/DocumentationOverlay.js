@@ -3,16 +3,12 @@ import styled from 'styled-components';
 import NavSidebar from './NavSidebar';
 import DocumentationPanel from './Panel'
 import Markdown from 'react-markdown'
+import Geometry from '../component/geometry.md'
 
 
 
 const Background = styled.div`
-  background-image: 
-    linear-gradient(
-      rgba(255, 182, 193, 0.4),
-      rgba(255, 182, 193, 0.4)
-    ),
-    url(https://images.unsplash.com/photo-1615818499660-30bb5816e1c7);
+  
   background-position: center;
   background-size: cover;
   min-height: 100vh;
@@ -32,7 +28,7 @@ const Panel = styled.section`
   );
   backdrop-filter: blur(6px);
   border-radius: 12px;
-  width: 320px;
+  width: 500px;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   border-left: 1px solid rgba(255, 255, 255, 0.5);
   padding: 60px;
@@ -97,14 +93,14 @@ const DocumentationOverlay = () => {
 
   const documents = {
     'Material Determination Tutorial': {
-      title: "Material Determination Tutorial",
-      description1: "An example - Material Determination <br> To determine the material type based on position coordinates, follow these<br>steps:<br>1. Define the position coordinates using a Vector{Float64}.<br>R = [x, y, z]<br>2. Call the geometry function to determine the material type.<br>material_type = geometry(R) <br>The geometry function returns a string indicating the material type<br>(insulator or GaAs).",
-      description2: "The `geometry_params` named tuple contains parameters crucial for defining the device's geometry, including the matrix of unit cell lattice vectors and the number of times to tile the cell over space.",
+      title: "Geometry Documentation",
+      description1: Geometry,
+      description2: "",
     },
     'Doc 2': {
-      title: "Document 2 Title",
-      description1: "Description *1* for Document 2...",
-      description2: "Description 2 for Document 2...",
+      title: "Functions Documentation",
+      description1: "",
+      description2: "",
     },
     'Doc 3': {
       title: "Document 3 Title",

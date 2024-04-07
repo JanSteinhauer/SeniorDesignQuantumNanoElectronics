@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import Markdown from 'react-markdown'
+import geometryPath from '../component/geometry.md';
+import functionPath from '../component/Functions.md';
 
 const Panel = styled.section`
   background-image: linear-gradient(
@@ -10,7 +12,7 @@ const Panel = styled.section`
   );
   backdrop-filter: blur(6px);
   border-radius: 12px;
-  width: 500px;
+  width: 800px;
   border-top: 1px solid rgba(255, 255, 255, 0.5);
   border-left: 1px solid rgba(255, 255, 255, 0.5);
   padding: 60px;
@@ -52,9 +54,21 @@ const CardText = styled.div`
 
 // New Component
 const DocumentationPanel = ({ title, description1, description2 }) => {
+  const [markdown, setMarkdown] = useState('');
+  const [funcmarkdown, setFuncMarkdown] = useState('');
   const checkType = (content) => {
     console.log(`Type of description1: ${typeof content}`);
   };
+ 
+
+  useEffect(() => {
+    fetch(geometryPath)
+      .then((response) => response.text())
+      .then((text) => setMarkdown(text));
+    fetch(functionPath)
+      .then((response) => response.text())
+      .then((text) => setFuncMarkdown(text));
+  }, []);
 
   // Call the function to check the type of description1
   checkType(description1);
@@ -62,11 +76,10 @@ const DocumentationPanel = ({ title, description1, description2 }) => {
     <Panel>
       <Title>{title}</Title>
       <CardText>
-      <Markdown>{description1}</Markdown> 
+        {title === 'Geometry Documentation' && <Markdown>{markdown}</Markdown>}
+        {title === 'Functions Documentation' && <Markdown>{funcmarkdown}</Markdown>}
       </CardText>
-      <CardText>
      
-      </CardText>
     </Panel>
   );
 };
