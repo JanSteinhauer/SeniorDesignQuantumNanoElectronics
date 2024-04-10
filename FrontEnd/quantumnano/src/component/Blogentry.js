@@ -7,7 +7,7 @@ const Background = styled.div`
       rgba(255, 182, 193, 0.4),
       rgba(255, 182, 193, 0.4)
     ),
-    url(https://images.unsplash.com/photo-1615818499660-30bb5816e1c7);
+    // url(https://images.unsplash.com/photo-1615818499660-30bb5816e1c7);
   background-position: center;
   background-size: cover;
   min-height: 100vh;

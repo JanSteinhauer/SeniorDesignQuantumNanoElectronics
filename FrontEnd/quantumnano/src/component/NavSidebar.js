@@ -40,9 +40,9 @@ const NavSidebar = ({ onLinkClick }) => {
       <Sidebar>
         <NavLink href="#" onClick={() => onLinkClick('Material Determination Tutorial')}>Geometry</NavLink>
         <NavLink href="#" onClick={() => onLinkClick('Doc 2')}>Functions</NavLink>
-        <NavLink href="#" onClick={() => onLinkClick('Doc 3')}>Doc 3</NavLink>
+        {/* <NavLink href="#" onClick={() => onLinkClick('Doc 3')}>Doc 3</NavLink>
         <NavLink href="#" onClick={() => onLinkClick('Doc 4')}>Doc 4</NavLink>
-        <NavLink href="#" onClick={() => onLinkClick('Doc 5')}>Doc 5</NavLink>
+        <NavLink href="#" onClick={() => onLinkClick('Doc 5')}>Doc 5</NavLink> */}
       </Sidebar>
     );
   };

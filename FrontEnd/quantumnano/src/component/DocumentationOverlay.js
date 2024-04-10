@@ -102,21 +102,21 @@ const DocumentationOverlay = () => {
       description1: "",
       description2: "",
     },
-    'Doc 3': {
-      title: "Document 3 Title",
-      description1: "Description 1 for Document 3...",
-      description2: "Description 2 for Document 3...",
-    },
-    'Doc 4': {
-      title: "Document 4 Title",
-      description1: "Description 1 for Document 4...",
-      description2: "Description 2 for Document 4...",
-    },
-    'Doc 5': {
-      title: "Document 5 Title",
-      description1: "Description 1 for Document 5...",
-      description2: "Description 2 for Document 5...",
-    },
+    // 'Doc 3': {
+    //   title: "Document 3 Title",
+    //   description1: "Description 1 for Document 3...",
+    //   description2: "Description 2 for Document 3...",
+    // },
+    // 'Doc 4': {
+    //   title: "Document 4 Title",
+    //   description1: "Description 1 for Document 4...",
+    //   description2: "Description 2 for Document 4...",
+    // },
+    // 'Doc 5': {
+    //   title: "Document 5 Title",
+    //   description1: "Description 1 for Document 5...",
+    //   description2: "Description 2 for Document 5...",
+    // },
    
   };
 
