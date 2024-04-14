@@ -11,7 +11,7 @@ const Peoples = () => {
        profileAltText="profile image"
        name="Prof. Jean Anne Incorvia" 
        role="Leading Professor" 
-       affiliation="UT Austin | Harward"
+       affiliation="UT Austin | Harvard"
        email = "incorvia@austin.utexas.edu"
        githubLink = "https://slack.com/intl/de-de/"
        linkedInLink = "https://www.linkedin.com/in/jaincorvia/"
