@@ -20,16 +20,17 @@ const ToggleSwitchContainer = styled.div`
 
 const Script = () => {
   const [showCodeEditor, setShowCodeEditor] = useState(false);
-  const [typeVar1, setTypeVar1] = useState("10");
-  const [typeVar2, setTypeVar2] = useState("12");
-  const [typeVar3, setTypeVar3] = useState("13");
-  const [typeVar4, setTypeVar4] = useState("14");
-  const [typeVar5, setTypeVar5] = useState("15");
-  const [typeVar6, setTypeVar6] = useState("16");
+  const [typeVar1_mat, setTypeVar1_mat] = useState("10");
+  const [typeVar2_mat, setTypeVar2_mat] = useState("12");
+  const [typeVar3_mat, setTypeVar3_mat] = useState("13");
+  const [typeVar4_mat, setTypeVar4_mat] = useState("14");
+  const [typeVar5_mat, setTypeVar5_mat] = useState("15");
+  const [typeVar6_mat, setTypeVar6_mat] = useState("16");
+  const [typeVar7_mat, setTypeVar7_mat] = useState("17");
 
   const createAndDownloadCSV = () => {
     const filename = 'visualization_params.csv';
-    const values = [typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6];
+    const values = [typeVar1_mat, typeVar2_mat, typeVar3_mat, typeVar4_mat, typeVar5_mat, typeVar6_mat];
     const headers = ["Variable1", "Variable2", "Variable3", "Variable4", "Variable5", "Variable6"];
     let csvContent = "data:text/csv;charset=utf-8,";
 
@@ -69,25 +70,57 @@ const Script = () => {
     URL.revokeObjectURL(url); // Free up memory - Important when handling blobs
   }
 
+  // In your Script component
+
+const updateVariable = (varName, value) => {
+  console.log("updatevar test", varName, value)
+  switch(varName) {
+    case 'typeVar1_mat':
+      setTypeVar1_mat(value);
+      break;
+    case 'typeVar2_mat':
+      setTypeVar2_mat(value);
+      break;
+    case 'typeVar3_mat':
+      setTypeVar3_mat(value);
+      break;
+    case 'typeVar4_mat':
+      setTypeVar4_mat(value);
+      break;
+    case 'typeVar5_mat':
+        setTypeVar5_mat(value);
+        break;
+    case 'typeVar6_mat':
+      setTypeVar6_mat(value);
+      break;
+    case 'typeVar7_mat':
+      setTypeVar7_mat(value);
+      break;
+    default:
+      console.warn(`No handler for ${varName}`);
+  }
+}
+
+
   const handleValuesChange = (index, value) => {
     switch(index) {
       case "1": 
-        setTypeVar1(value);
+        setTypeVar1_mat(value);
         break;
       case "2":
-        setTypeVar2(value);
+        setTypeVar2_mat(value);
         break;
       case "3":
-        setTypeVar3(value);
+        setTypeVar3_mat(value);
         break;
       case "4":
-        setTypeVar4(value);
+        setTypeVar4_mat(value);
         break;
       case "5":
-        setTypeVar5(value);
+        setTypeVar5_mat(value);
         break;
       case "6":
-        setTypeVar6(value);
+        setTypeVar6_mat(value);
         break;
       default:
         console.warn(`Unhandled field index: ${index}`);
@@ -107,19 +140,22 @@ const Script = () => {
       {showCodeEditor ? (
         <>
           <h2>Code Editor</h2>
-          <CodeEditor 
-            typeVar1={typeVar1} 
-            typeVar2={typeVar2} 
-            typeVar3={typeVar3} 
-            typeVar4={typeVar4} 
-            typeVar5={typeVar5} 
-            typeVar6={typeVar6} 
+          <CodeEditor
+            updateVariable={updateVariable} 
+            typeVar1_mat={typeVar1_mat} 
+            typeVar2_mat={typeVar2_mat} 
+            typeVar3_mat={typeVar3_mat} 
+            typeVar4_mat={typeVar4_mat} 
+            typeVar5_mat={typeVar5_mat} 
+            typeVar6_mat={typeVar6_mat} 
+            typeVar7_mat={typeVar7_mat} 
+            
           />
         </>
       ) : (
         <>
           {/* <h2>Input Parameters for Material</h2> */}
-          <InputFields onValuesChange={handleValuesChange} values={[typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6]} />
+          <InputFields onValuesChange={handleValuesChange} values={[typeVar1_mat, typeVar2_mat, typeVar3_mat, typeVar4_mat, typeVar5_mat, typeVar6_mat, typeVar7_mat]} />
           {/* <h2>Input Parameters for Geometry</h2>
           <InputFields onValuesChange={handleValuesChange} values={[typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6]} />
           <h2>Input Parameters for Run Configuration</h2>

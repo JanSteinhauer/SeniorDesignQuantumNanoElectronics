@@ -27,11 +27,16 @@ const Header = styled.h2`
   font-size: 2.0em; /* Adjust the font size as needed */
 `;
 
-const InputFields = () => {
+const InputFields = (values) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [inputValuesMaterial, setInputValuesMaterial] = useState(Array(7).fill()); // Material fields:
   const [inputValuesGeometry, setInputValuesGeometry] = useState(Array(7).fill()); // Geometry fields:
   const [inputValuesRuns, setInputValuesRuns] = useState(Array(15).fill()); // Runs fields:
+
+  useEffect(() => {
+    setInputValuesMaterial([values.values[0], values.values[1], values.values[2], values.values[3], values.values[4], values.values[5], values.values[6]]);
+  }, []);
+  
 
   const handleValueChange = (index, value, section) => {
     switch (section) {
@@ -73,6 +78,7 @@ const InputFields = () => {
         break;
     }
   };
+
 
   useEffect(() => {
     setValuesBasedOnOption();
@@ -123,6 +129,7 @@ const InputFields = () => {
           ? `Input Parameters for ${selectedOption.label}`
           : 'Select an option to set input parameters'}
       </Header>
+      <button onClick={() =>{console.log(inputValuesMaterial, values.values[0])}}>test</button>
       <DropDown
         options={[
           { value: 'defaults', label: 'Defaults' },
