@@ -27,41 +27,53 @@ const Header = styled.h2`
   font-size: 2.0em; /* Adjust the font size as needed */
 `;
 
-const InputFields = (values) => {
+const InputFields = ({ values, onValuesChange }) => {
   const [selectedOption, setSelectedOption] = useState(null);
   const [inputValuesMaterial, setInputValuesMaterial] = useState(Array(7).fill()); // Material fields:
   const [inputValuesGeometry, setInputValuesGeometry] = useState(Array(7).fill()); // Geometry fields:
   const [inputValuesRuns, setInputValuesRuns] = useState(Array(15).fill()); // Runs fields:
 
   useEffect(() => {
-    setInputValuesMaterial([values.values[0], values.values[1], values.values[2], values.values[3], values.values[4], values.values[5], values.values[6]]);
+    setInputValuesMaterial([values[0], values[1], values[2], values[3], values[4], values[5], values[6]]);
   }, []);
   
 
-  const handleValueChange = (index, value, section) => {
-    switch (section) {
-      case 'Material':
-        const updatedValuesMaterial = [...inputValuesMaterial];
-        updatedValuesMaterial[index] = value;
-        setInputValuesMaterial(updatedValuesMaterial);
-        break;
-      case 'Geometry':
-        const updatedValuesGeometry = [...inputValuesGeometry];
-        updatedValuesGeometry[index] = value;
-        setInputValuesGeometry(updatedValuesGeometry);
-        break;
-      case 'Runs':
-        const updatedValuesRuns = [...inputValuesRuns];
-        updatedValuesRuns[index] = value;
-        setInputValuesRuns(updatedValuesRuns);
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleValueChange = (index, value, section) => {
+  //   switch (section) {
+  //     case 'Material':
+  //       const updatedValuesMaterial = [...inputValuesMaterial];
+  //       updatedValuesMaterial[index] = value;
+  //       setInputValuesMaterial(updatedValuesMaterial);
+  //       break;
+  //     case 'Geometry':
+  //       const updatedValuesGeometry = [...inputValuesGeometry];
+  //       updatedValuesGeometry[index] = value;
+  //       setInputValuesGeometry(updatedValuesGeometry);
+  //       break;
+  //     case 'Runs':
+  //       const updatedValuesRuns = [...inputValuesRuns];
+  //       updatedValuesRuns[index] = value;
+  //       setInputValuesRuns(updatedValuesRuns);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   const handleDropdownSelect = (option) => {
     setSelectedOption(option);
+  };
+
+  const handleValueChange = (index, value, section) => {
+    const sectionIndexOffset = {
+      'Material': 0,
+      'Geometry': 7,
+      'Runs': 14
+    };
+
+    // Calculate global index considering section
+    const globalIndex = index + sectionIndexOffset[section];
+    onValuesChange(globalIndex, value);
   };
 
   const setValuesBasedOnOption = () => {
@@ -129,7 +141,6 @@ const InputFields = (values) => {
           ? `Input Parameters for ${selectedOption.label}`
           : 'Select an option to set input parameters'}
       </Header>
-      <button onClick={() =>{console.log(inputValuesMaterial, values.values[0])}}>test</button>
       <DropDown
         options={[
           { value: 'defaults', label: 'Defaults' },
@@ -151,11 +162,12 @@ const InputFields = (values) => {
                   helpText={inputFieldPropertiesMaterial[index].helpText}
                   showAsterisk={true}
                   value={value}
-                  onValueChange={(newValue) =>
-                    handleValueChange(index, newValue, 'Material')
+                  onValueChange={(newValue) =>{
+                    console.log("values", index, "test", newValue)
+                    handleValueChange(index, newValue, 'Material')}
                   }
                   min={0}
-                  max={1}
+                  max={3000}
                 />
               </React.Fragment>
             ))}

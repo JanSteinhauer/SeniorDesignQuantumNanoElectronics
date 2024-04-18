@@ -103,24 +103,33 @@ const updateVariable = (varName, value) => {
 
 
   const handleValuesChange = (index, value) => {
+    console.log("index", index, "vql", value)
+    // if(index === 0){
+    //   console.log("ich war hier")
+    //   setTypeVar1_mat(value)
+    // }
     switch(index) {
-      case "1": 
-        setTypeVar1_mat(value);
+      case 0:
+        setTypeVar1_mat(value)
         break;
-      case "2":
+      case 1: 
+        
         setTypeVar2_mat(value);
         break;
-      case "3":
+      case 2:
         setTypeVar3_mat(value);
         break;
-      case "4":
+      case 3:
         setTypeVar4_mat(value);
         break;
-      case "5":
+      case 4:
         setTypeVar5_mat(value);
         break;
-      case "6":
+      case 5:
         setTypeVar6_mat(value);
+        break;
+      case 6:
+        setTypeVar7_mat(value);
         break;
       default:
         console.warn(`Unhandled field index: ${index}`);
@@ -136,7 +145,6 @@ const updateVariable = (varName, value) => {
       <ToggleSwitchContainer>
         <ToggleSwitch onSwitch={setShowCodeEditor} />
       </ToggleSwitchContainer>
-
       {showCodeEditor ? (
         <>
           <h2>Code Editor</h2>
@@ -154,15 +162,9 @@ const updateVariable = (varName, value) => {
         </>
       ) : (
         <>
-          {/* <h2>Input Parameters for Material</h2> */}
-          <InputFields onValuesChange={handleValuesChange} values={[typeVar1_mat, typeVar2_mat, typeVar3_mat, typeVar4_mat, typeVar5_mat, typeVar6_mat, typeVar7_mat]} />
-          {/* <h2>Input Parameters for Geometry</h2>
-          <InputFields onValuesChange={handleValuesChange} values={[typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6]} />
-          <h2>Input Parameters for Run Configuration</h2>
-          <InputFields onValuesChange={handleValuesChange} values={[typeVar1, typeVar2, typeVar3, typeVar4, typeVar5, typeVar6]} />
-          <h2>Testing</h2>
-          <InputFieldsFake/> */}
 
+          <InputFields onValuesChange={handleValuesChange} values={[typeVar1_mat, typeVar2_mat, typeVar3_mat, typeVar4_mat, typeVar5_mat, typeVar6_mat, typeVar7_mat]} />
+ 
         </>
       )}
   
