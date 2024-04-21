@@ -54,7 +54,7 @@ const Visualization = () => {
   return (
     
     <div>
-    <iframe src="https://2912-209-166-123-129.ngrok-free.app" title="Ngrok Content" style={{width: '100%', height: '800px', border: 'none'}}></iframe>
+    <iframe src="https://a047-209-166-123-128.ngrok-free.app" title="Ngrok Content" style={{width: '100%', height: '800px', border: 'none'}}></iframe>
 
     </div>
   );
