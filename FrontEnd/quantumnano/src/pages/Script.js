@@ -28,8 +28,57 @@ const Script = () => {
   const [typeVar6_mat, setTypeVar6_mat] = useState("16");
   const [typeVar7_mat, setTypeVar7_mat] = useState("17");
 
+  const initial_export_Code = `
+  @cfunction(callable, ReturnType, (ArgumentTypes...,)) -> Ptr{Cvoid}
+  @cfunction($callable, ReturnType, (ArgumentTypes...,)) -> CFunction
+  julia> A = zeros(5, 5);
+  julia> B = [1 2; 3 4];
+  
+  # Function for material parameters
+  function material_parameters(
+          mat_param1::${typeVar1_mat}, 
+          mat_param2::${typeVar2_mat}, 
+          mat_param3::${typeVar3_mat}, 
+          mat_param4::${typeVar4_mat}, 
+          mat_param5::${typeVar5_mat}, 
+          mat_param6::${typeVar6_mat},
+          mat_param7::${typeVar7_mat})
+      return (mat_param1, mat_param2, mat_param3, mat_param4, mat_param5, mat_param6, mat_param7)
+  end
+  
+  # ... (rest of the code can be added here using their respective typeVars)
+    `;
+
+    const exportToJuliaFile = () => {
+      const blob = new Blob([initial_export_Code], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'run.jl'; // Naming the download file
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url); // Clean up
+   
+      link.href = url;
+      link.download = 'geometry.jl'; // Naming the download file
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url); // Clean up
+  
+      link.href = url;
+      link.download = 'material.jl'; // Naming the download file
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url); // Clean up
+    };
+    
   const createAndDownloadCSV = () => {
     const filename = 'visualization_params.csv';
+    const filename_run ='run.jl'
+
     const values = [typeVar1_mat, typeVar2_mat, typeVar3_mat, typeVar4_mat, typeVar5_mat, typeVar6_mat];
     const headers = ["Variable1", "Variable2", "Variable3", "Variable4", "Variable5", "Variable6"];
     let csvContent = "data:text/csv;charset=utf-8,";
@@ -168,7 +217,7 @@ const updateVariable = (varName, value) => {
         </>
       )}
   
-  <Button heading={"Start Export"} onClick={createAndDownloadCSV} />
+  <Button heading={"Start Export"} onClick={exportToJuliaFile} />
 
     </div>
 
