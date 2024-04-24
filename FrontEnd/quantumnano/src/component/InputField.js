@@ -1,7 +1,6 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types'; // Make sure this import is added
-
 
 const Container = styled.div`
   width: 300px;
@@ -13,12 +12,13 @@ const Container = styled.div`
 const Label = styled.label`
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: 16px;
   margin-bottom: 5px;
   position: relative;
   background-color: transparent;
   justify-content: flex-start;
 `;
+
 
 const InfoIcon = styled.span`
   position: absolute;
@@ -34,6 +34,7 @@ const InfoIcon = styled.span`
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 `;
 
+
 const Asterisk = styled.span`
   color: red;
 `;
@@ -45,68 +46,66 @@ const Input = styled.input`
   border-radius: 8px;
 `;
 
+
 const HelpText = styled.p`
   font-size: 12px;
   color: #666;
   display: ${props => props.show ? 'block' : 'none'};
 `;
 
-const debounce = (func, wait) => {
-  let timeout;
-  return function executedFunction(...args) {
-    const later = () => {
+const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onValueChange, min, max, value }) => {
+  const [inputValue, setInputValue] = useState(value || '');
+
+  useEffect(() => {
+    // This effect updates the internal state whenever the value prop changes
+    setInputValue(value);
+  }, [value]);
+
+  const debounce = (func, wait) => {
+    let timeout;
+    return function executedFunction(...args) {
+      const later = () => {
+        clearTimeout(timeout);
+        func(...args);
+      };
+
       clearTimeout(timeout);
-      func(...args);
+      timeout = setTimeout(later, wait);
     };
-
-    clearTimeout(timeout);
-    timeout = setTimeout(later, wait);
   };
-};
 
-const InputField = ({ labelText, inputPlaceholder, helpText, showAsterisk, onValueChange, min, max }) => {
-  const [value, setValue] = useState("");
-  const [showHelp, setShowHelp] = useState(false); // Define the showHelp state
-
-  const debouncedValidation = useCallback(debounce((newValue) => {
-    // Check if newValue is a number
-    if (isNaN(newValue)) {
-      alert('Please enter a valid number');
-      setValue('');
-      return;
-    }
-
-    // Check the bounds
-    if (newValue < min || newValue > max) {
-      alert(`Value must be between ${min} and ${max}`);
-      setValue('');
-      return;
-    }
-
-    setValue(newValue);
-    onValueChange && onValueChange(newValue);
-  }, 350), []);
+  const debouncedValidation = useCallback(
+    debounce((newValue) => {
+      // Validations...
+      if (!isNaN(newValue) && newValue >= min && newValue <= max) {
+        setInputValue(newValue);
+        onValueChange && onValueChange(newValue);
+      } else {
+        setInputValue('');
+        onValueChange && onValueChange('');
+      }
+    }, 350),
+    [min, max, onValueChange]
+  );
 
   const handleInputChange = (e) => {
     const newValue = e.target.value;
-    setValue(newValue); // Update the value immediately for a responsive UI
-    debouncedValidation(newValue); // Validate with a delay
-  }
+    debouncedValidation(newValue);
+  };
+
   return (
     <Container>
       <Label>
-        {labelText} {showAsterisk && <Asterisk> *</Asterisk>}
-        <InfoIcon onClick={() => setShowHelp(!showHelp)}>i</InfoIcon>
+        {labelText} {showAsterisk && <Asterisk>*</Asterisk>}
+        <InfoIcon>i</InfoIcon>
       </Label>
-      <Input 
-        type="text" 
-        placeholder={inputPlaceholder} 
-        value={value} 
-        onChange={handleInputChange} 
+      <Input
+        type="text"
+        placeholder={inputPlaceholder}
+        value={inputValue}
+        onChange={handleInputChange}
       />
-      <HelpText show={showHelp}>
-        {helpText}
-      </HelpText>
+      <HelpText show={!!helpText}>{helpText}</HelpText>
     </Container>
   );
 };
@@ -118,7 +117,8 @@ InputField.propTypes = {
   showAsterisk: PropTypes.bool,
   onValueChange: PropTypes.func.isRequired,
   min: PropTypes.number.isRequired,
-  max: PropTypes.number.isRequired
+  max: PropTypes.number.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]), // Ensure value can be a string or number
 };
 
 export default InputField;
