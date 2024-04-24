@@ -27,14 +27,16 @@ const Header = styled.h2`
   font-size: 2.0em; /* Adjust the font size as needed */
 `;
 
-const InputFields = ({ values, onValuesChange }) => {
+const InputFields = ({ values, onValuesChange, values_geo, values_run }) => {
   const [selectedOption, setSelectedOption] = useState(null);
-  const [inputValuesMaterial, setInputValuesMaterial] = useState(Array(7).fill()); // Material fields:
-  const [inputValuesGeometry, setInputValuesGeometry] = useState(Array(7).fill()); // Geometry fields:
-  const [inputValuesRuns, setInputValuesRuns] = useState(Array(15).fill()); // Runs fields:
+  const [inputValuesMaterial, setInputValuesMaterial] = useState(Array(3).fill()); // Material fields:
+  const [inputValuesGeometry, setInputValuesGeometry] = useState(Array(2).fill()); // Geometry fields:
+  const [inputValuesRuns, setInputValuesRuns] = useState(Array(2).fill()); // Runs fields:
 
   useEffect(() => {
-    setInputValuesMaterial([values[0], values[1], values[2], values[3], values[4], values[5], values[6]]);
+    setInputValuesMaterial([values[0], values[1], values[2]]);
+    setInputValuesGeometry([values_geo[0], values_geo[1]]);
+    setInputValuesRuns([values_run[0], values_run[1]]);
   }, []);
   
 
@@ -76,17 +78,36 @@ const InputFields = ({ values, onValuesChange }) => {
     onValuesChange(globalIndex, value);
   };
 
+  const geochange = (index, value) => {
+    if (index == 0){
+      values_geo[2](value)
+    } else {
+      values_geo[3](value)
+    }
+  }
+
+
+  const runchange = (index, value) => {
+    if (index == 0){
+      values_run[2](value)
+    } else {
+      values_run[3](value)
+    }
+  }
+
+
+
   const setValuesBasedOnOption = () => {
     switch (selectedOption?.value) {
       case 'defaults':
-        setInputValuesMaterial(Array(7).fill());
-        setInputValuesGeometry(Array(7).fill());
-        setInputValuesRuns(Array(15).fill());
+        setInputValuesMaterial(["", "", ""]);
+        setInputValuesGeometry(["", ""]);
+        setInputValuesRuns(["", ""]);
         break;
       case 'Graphene':
-        setInputValuesMaterial([1, 1, 0, 0, 0, 0, 0]);
-        setInputValuesGeometry([0, 0, 2, 0, 0, 1, 4]);
-        setInputValuesRuns([1, 4, 0, 1, 0, 0, 0, 0, 1, 4, 0, 0, 1, 0, 1]);
+        setInputValuesMaterial([1, 1, 0]);
+        setInputValuesGeometry([0, 0]);
+        setInputValuesRuns([1, 4]);
         break;
     }
   };
@@ -97,18 +118,18 @@ const InputFields = ({ values, onValuesChange }) => {
   }, [selectedOption]);
 
   const inputFieldPropertiesMaterial = [
-    { name: 'material_field_1_hopping', labelText: 'Hopping', inputPlaceholder: 'Enter value', helpText: 'Help text for Material - hopping' },
+    { name: 'material_field_1_hopping', labelText: 'Semiconductor', inputPlaceholder: 'Enter value', helpText: 'Help text for Semiconducto' },
     { name: 'material_field_2_metal', labelText: 'Metal', inputPlaceholder: 'Enter value', helpText: 'Help text for Material - metal' },
-    { name: 'material_field_3_insulator', labelText: 'Insulator', inputPlaceholder: 'Enter value', helpText: 'Help text for Material - insulator' },
+    { name: 'material_field_3_insulator', labelText: 'Weyl Semimetal', inputPlaceholder: 'Enter value', helpText: 'Help text for Weyl Semimetalr' },
     { name: 'material_field_4_weyl1', labelText: 'Weyl1', inputPlaceholder: 'Enter value', helpText: 'Help text for Material - weyl1' },
     { name: 'material_field_5_weyl2', labelText: 'Weyl2', inputPlaceholder: 'Enter value', helpText: 'Help text for Material - weyl2' },
     { name: 'material_field_6_weyl3', labelText: 'Weyl3', inputPlaceholder: 'Enter value', helpText: 'Help text for Material - weyl3' },
-    { name: 'material_field_7_chern_2d', labelText: 'Chern 2D', inputPlaceholder: 'Enter value', helpText: 'Help text for Material - chern 2d' },
+
   ];
 
   const inputFieldPropertiesGeometry = [
-    { name: 'geometry_field_1_position_coordinates', labelText: 'Position Coordinates', inputPlaceholder: 'Enter value', helpText: 'Define the position coordinates using a Vector{Float64}' },
-    { name: 'geometry_field_2_material_type', labelText: 'Material Type', inputPlaceholder: 'Enter value', helpText: 'Help text for Geometry - Material Type' },
+    { name: 'geometry_field_1_position_coordinates', labelText: 'Sheet', inputPlaceholder: 'Enter value', helpText: '' },
+    { name: 'geometry_field_2_material_type', labelText: 'Nanowire', inputPlaceholder: 'Enter value', helpText: '' },
     { name: 'geometry_field_3_A', labelText: 'A', inputPlaceholder: 'Enter value', helpText: 'Matrix of unit cell lattice vectors.' },
     { name: 'geometry_field_4_nx', labelText: 'nx', inputPlaceholder: 'Enter value', helpText: 'Number of times to tile the cell over space in the x-direction' },
     { name: 'geometry_field_5_ny', labelText: 'ny', inputPlaceholder: 'Enter value', helpText: 'Number of times to tile the cell over space in the y-direction' },
@@ -117,8 +138,8 @@ const InputFields = ({ values, onValuesChange }) => {
   ];
 
   const inputFieldPropertiesRuns = [
-    { name: 'runs_field_1_band', labelText: 'Band', inputPlaceholder: 'Enter value', helpText: ' Boolean indicating whether to compute electronic band structure' },
-    { name: 'runs_field_2_bands_project', labelText: 'Bands Project', inputPlaceholder: 'Enter value', helpText: 'List of projection operators for computing bands' },
+    { name: 'runs_field_1_band', labelText: 'Bandstructure', inputPlaceholder: 'Enter value', helpText: '' },
+    { name: 'runs_field_2_bands_project', labelText: 'Conducentance', inputPlaceholder: 'Enter value', helpText: '' },
     { name: 'runs_field_3_possion', labelText: 'Possion', inputPlaceholder: 'Enter value', helpText: 'Boolean indicating whether to include Poisson solver' },
     { name: 'runs_field_4_DOS', labelText: 'DOS', inputPlaceholder: 'Enter value', helpText: 'Boolean indicating whether to compute density of state' },
     { name: 'runs_field_5_v', labelText: 'ΔV', inputPlaceholder: 'Enter value', helpText: 'Voltage bias' },
@@ -184,7 +205,7 @@ const InputFields = ({ values, onValuesChange }) => {
                   showAsterisk={true}
                   value={value}
                   onValueChange={(newValue) =>
-                    handleValueChange(index, newValue, 'Geometry')
+                    geochange(index, newValue)
                   }
                   min={0}
                   max={300}
@@ -204,7 +225,7 @@ const InputFields = ({ values, onValuesChange }) => {
                   showAsterisk={true}
                   value={value}
                   onValueChange={(newValue) =>
-                    handleValueChange(index, newValue, 'Runs')
+                    runchange(index, newValue)
                   }
                   min={0}
                   max={100}
