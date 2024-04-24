@@ -51,7 +51,7 @@ const NavBar = () => {
       <NavItem to="/script">Script</NavItem>
       <NavItem to="/visualization">Visualization</NavItem>
       <NavItem to="/people">People</NavItem>
-      <NavItem to="/blog">News</NavItem>
+      <NavItem to="/blog">Video</NavItem>
     </Navbar>
   );
 };
