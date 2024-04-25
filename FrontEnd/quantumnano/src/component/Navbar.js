@@ -49,7 +49,7 @@ const NavBar = () => {
       <NavItem to="/">Home</NavItem>
       <NavItem to="/documentation">Documentation</NavItem>
       <NavItem to="/script">Script</NavItem>
-      <NavItem to="/visualization">Visualization</NavItem>
+      <NavItem to="/visualization">Plot</NavItem>
       <NavItem to="/people">People</NavItem>
       <NavItem to="/blog">Video</NavItem>
     </Navbar>
