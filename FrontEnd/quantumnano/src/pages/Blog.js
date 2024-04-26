@@ -16,7 +16,7 @@ const Blog = () => {
   return (
   // <Blogentry></Blogentry>
   <CardText>
-<iframe width="560" height="315" src="https://www.youtube.com/embed/bfjZW6gf4Fo?si=5ggleQNhUMUJDkcR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  
+<iframe width="560" height="315" src="https://www.youtube.com/embed/-f6NFMmWQH0?si=NHvmsrmbMt0wrHrI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>  
   </CardText>
   );
 };
