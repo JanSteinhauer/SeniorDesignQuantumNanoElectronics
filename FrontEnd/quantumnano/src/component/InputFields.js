@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import InputField from './InputField';
 import DropDown from './DropDown';
+import FileDropIn from './FildDropIn';
 
 const Container = styled.div`
   display: flex;
@@ -157,6 +158,8 @@ const InputFields = ({ values, onValuesChange, values_geo, values_run }) => {
 
   return (
     <Container>
+       <FileDropIn values_mat={setInputValuesMaterial} values_geo={setInputValuesGeometry} values_run={setInputValuesRuns} />
+
       <Header>
         {selectedOption
           ? `Input Parameters for ${selectedOption.label}`

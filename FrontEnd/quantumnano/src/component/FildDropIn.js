@@ -105,7 +105,7 @@ const HiddenFileInput = styled.input`
 `;
 
 
-const FileDropIn = () => {
+const FileDropIn = ({values_mat, values_geo, values_run}) => {
     const [dragging, setDragging] = useState(false);
     const [uploadedFile, setUploadedFile] = useState(null);
     const fileInputRef = useRef(null);  // A ref to reference the hidden file input
@@ -156,6 +156,7 @@ const FileDropIn = () => {
     const onDrop = useCallback((e) => {
       e.preventDefault();
       setDragging(false);
+      console.log("that was dropped", e.dataTransfer.files)
     
       const files = e.dataTransfer.files;
       if (files && files.length > 0) {
@@ -168,16 +169,24 @@ const FileDropIn = () => {
           }
       
           const reader = new FileReader();
-      
+          
           reader.onload = (event) => {
             const content = event.target.result;
+          
             try {
-                const jsonData = csvToJson(content); // Convert the CSV to JSON
-                console.log(jsonData);
-                setUploadedFile(file.name);
+              // values
+              console.log(values_mat, "test please")
+              // values.values[2](2)
+              values_mat([content[0],content[3],content[6]])
+              values_geo([content[9],content[12]])
+              values_run([content[15],content[18]])
+              alert("csv successfully imported")
+            
+              // values.values[0][2](2)
+                // console.log("test", values.values[4](2))
             } catch (error) {
                 console.error("Error converting CSV to JSON", error);
-                alert("CSV must contain 'Metal' and 'Insulator' headers.");
+                alert("There seems to be an issue with the csv");
                 setUploadedFile(null); // Prevent the preview if there's an error
 
                 return;
@@ -216,17 +225,22 @@ const FileDropIn = () => {
           reader.onload = (event) => {
             const content = event.target.result;
             try {
-              const jsonData = csvToJson(content); // Convert the CSV to JSON
-              console.log(jsonData);
-              // Here you can handle the jsonData, for example:
-              // this.props.onFileProcessed(jsonData);
+              // values
+              console.log(values_mat, "test please")
+              // values.values[2](2)
+              values_mat([content[0],content[3],content[6]])
+              values_geo([content[9],content[12]])
+              values_run([content[15],content[18]])
+              alert("csv successfully imported")
+            
+              // values.values[0][2](2)
+                // console.log("test", values.values[4](2))
             } catch (error) {
-              console.error("CSV must contain 'Metal' and 'Insulator' headers.", error);
-              alert("CSV must contain 'Metal' and 'Insulator' headers2222.");
-              problem = true
-              setUploadedFile(null); // Prevent the preview if there's an error
+                console.error("Error converting CSV to JSON", error);
+                alert("There seems to be an issue with the csv");
+                setUploadedFile(null); // Prevent the preview if there's an error
 
-              return;
+                return;
             }
           };
       
