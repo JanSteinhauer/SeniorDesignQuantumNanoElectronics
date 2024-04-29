@@ -436,9 +436,9 @@ geometry_params = Dict("A" => 2.866*nm*I(3), # this is the matrix of unit cell l
 
     const exportToJuliaFile = () => {
       // console.log("test 1")
-      // exportToJuliaFileGeo()
-      // exportToJuliaFileMat()
-      // exportToJuliaFileRun()
+      exportToJuliaFileGeo()
+      exportToJuliaFileMat()
+      exportToJuliaFileRun()
       // console.log("test2")
       createAndDownloadCSV()
     };
